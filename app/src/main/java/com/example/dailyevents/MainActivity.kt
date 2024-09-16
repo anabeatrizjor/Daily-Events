@@ -3,24 +3,18 @@ package com.example.dailyevents
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.widget.Button
 import android.widget.CalendarView
+import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var eventAdapter: EventAdapter
-    private val eventMap = mutableMapOf<String, MutableList<String>>() // Eventos por data
+    private val eventMap = mutableMapOf<String, MutableList<Event>>() // Eventos por data
     private var selectedDate: String = LocalDate.now().toString() // Data selecionada no formato "yyyy-MM-dd"
-
-    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,24 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
         val rvEvents = findViewById<RecyclerView>(R.id.rvEvents)
-        val btnAddEvent = findViewById<Button>(R.id.btnAddEvent)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-
-        setSupportActionBar(toolbar)
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView = findViewById<NavigationView>(R.id.navigation_view)
-        navigationView.setNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_item1 -> {
-                    // Handle item 1 click
-                }
-                R.id.nav_item2 -> {
-                    // Handle item 2 click
-                }
-            }
-            drawerLayout.closeDrawer(GravityCompat.START)
-            true
-        }
+        val btnAddEvent = findViewById<ImageView>(R.id.btnAddEvent)
 
         rvEvents.layoutManager = LinearLayoutManager(this)
         eventAdapter = EventAdapter(
@@ -68,6 +45,8 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("date", selectedDate)
             addEventLauncher.launch(intent)
         }
+
+        window.statusBarColor = getColor(R.color.subColor)
     }
 
     // Atualiza os eventos da data selecionada
@@ -78,7 +57,9 @@ class MainActivity : AppCompatActivity() {
     private fun openEditEventActivity(position: Int) {
         val event = eventMap[selectedDate]?.get(position)
         val intent = Intent(this, EditEventActivity::class.java).apply {
-            putExtra("event", event)
+            putExtra("title", event?.title)
+            putExtra("description", event?.description)
+            putExtra("time", event?.time)
             putExtra("position", position)
         }
         editEventLauncher.launch(intent)
@@ -91,9 +72,12 @@ class MainActivity : AppCompatActivity() {
 
     private val editEventLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
-            val updatedEvent = result.data?.getStringExtra("updatedEvent")
+            val updatedTitle = result.data?.getStringExtra("updatedTitle")
+            val updatedDescription = result.data?.getStringExtra("updatedDescription")
+            val updatedTime = result.data?.getStringExtra("updatedTime")
             val position = result.data?.getIntExtra("position", -1)
-            if (updatedEvent != null && position != null && position >= 0) {
+            if (updatedTitle != null && updatedDescription != null && updatedTime != null && position != null && position >= 0) {
+                val updatedEvent = Event(updatedTitle, updatedDescription, updatedTime)
                 eventMap[selectedDate]?.set(position, updatedEvent)
                 updateEventsForSelectedDate()
             }
@@ -102,13 +86,16 @@ class MainActivity : AppCompatActivity() {
 
     private val addEventLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
-            val event = result.data?.getStringExtra("event")
+            val title = result.data?.getStringExtra("title")
+            val description = result.data?.getStringExtra("description")
+            val time = result.data?.getStringExtra("time")
             val date = result.data?.getStringExtra("date")
-            if (event != null && date != null) {
+            if (title != null && description != null && time != null && date != null) {
+                val newEvent = Event(title, description, time)
                 if (!eventMap.containsKey(date)) {
                     eventMap[date] = mutableListOf()
                 }
-                eventMap[date]?.add(event)
+                eventMap[date]?.add(newEvent)
                 updateEventsForSelectedDate()
             }
         }

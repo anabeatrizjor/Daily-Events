@@ -1,21 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".EditEventActivity"
+    android:background="@color/backgroundColor">
+
+    <ImageView
+        android:id="@+id/backArrowEdit"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:src="@drawable/back_arrow"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"/>
+
+    <TextView
+        android:id="@+id/textEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DAILY EVENTS"
+        android:fontFamily="@font/poppins_extrabold"
+        android:layout_marginTop="80dp"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+        android:id="@+id/titleEdit"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/normal_border"
+        android:layout_below="@+id/textEdit"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/textMainEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edite o evento"
+            android:textColor="@color/backgroundColor"
+            android:fontFamily="@font/poppins_extrabold"
+            android:textSize="15sp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
     <EditText
-        android:id="@+id/etEditEvent"
+        android:id="@+id/etTitleEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Digite o evento"
-        android:inputType="text" />
+        android:hint="Título (máx. 50 caracteres)"
+        android:background="@drawable/border_input"
+        android:maxLength="50"
+        android:layout_below="@+id/titleEdit"
+        android:padding="10dp"
+        android:fontFamily="@font/roboto_bold"
+        android:layout_margin="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/etDescriptionEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:background="@drawable/border_input"
+        android:hint="Descrição"
+        android:padding="10dp"
+        android:layout_margin="16dp"
+        android:layout_below="@id/etTitleEdit"/>
+
+    <EditText
+        android:id="@+id/etTimeEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Horário (HH:mm)"
+        android:fontFamily="@font/roboto_bold"
+        android:padding="10dp"
+        android:background="@drawable/border_input"
+        android:layout_margin="16dp"
+        android:layout_below="@id/etDescriptionEdit"/>
 
     <Button
         android:id="@+id/btnSaveEditEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salvar" />
+        android:text="Salvar Evento"
+        android:backgroundTint="@color/attColor"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/backgroundColor"
+        android:layout_margin="16dp"
+        android:layout_below="@id/etTimeEdit"
+        android:layout_centerHorizontal="true"/>
 
-</LinearLayout>
+</RelativeLayout>

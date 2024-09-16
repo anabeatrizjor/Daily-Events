@@ -2,27 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp">
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/border_item">
 
     <TextView
-        android:id="@+id/tvEvent"
-        android:layout_width="0dp"
+        android:id="@+id/tvEventTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:textSize="16sp"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
 
-    <Button
-        android:id="@+id/btnEditEvent"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tvEventDescription"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Editar" />
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="4dp" />
 
-    <Button
-        android:id="@+id/btnDeleteEvent"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tvEventTime"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Excluir" />
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="8dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/btnEditEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:backgroundTint="@color/subColor"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/btnDeleteEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:backgroundTint="@color/subColor"
+            android:text="Excluir" />
+    </LinearLayout>
 </LinearLayout>

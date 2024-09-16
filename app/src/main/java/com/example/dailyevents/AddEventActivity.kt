@@ -1,15 +1,18 @@
 package com.example.dailyevents
 
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 
 class AddEventActivity : AppCompatActivity() {
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_event)
@@ -18,6 +21,11 @@ class AddEventActivity : AppCompatActivity() {
         val etDescription = findViewById<EditText>(R.id.etDescription)
         val etTime = findViewById<EditText>(R.id.etTime)
         val btnSaveEvent = findViewById<Button>(R.id.btnSaveEvent)
+        val backArrow = findViewById<ImageView>(R.id.backArrow)
+
+        backArrow.setOnClickListener {
+            finish()
+        }
 
         etTime.setOnClickListener {
             showTimePickerDialog()
@@ -39,6 +47,8 @@ class AddEventActivity : AppCompatActivity() {
                 // Handle empty title or time case if needed
             }
         }
+
+        window.statusBarColor = getColor(R.color.subColor)
     }
 
     private fun showTimePickerDialog() {
