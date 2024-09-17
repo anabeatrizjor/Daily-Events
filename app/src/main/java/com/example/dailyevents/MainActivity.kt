@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         }, onDeleteClick = { position ->
             deleteEvent(position)
         })
-        // rvEvents.adapter = eventAdapter
+         rvEvents.adapter = eventAdapter
         rvEvents.layoutManager = LinearLayoutManager(this)
 
         // Configura o listener para o calendário
