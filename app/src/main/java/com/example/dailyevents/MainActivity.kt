@@ -2,6 +2,7 @@ package com.example.dailyevents
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,13 +25,13 @@ class MainActivity : AppCompatActivity() {
         val rvEvents = findViewById<RecyclerView>(R.id.rvEvents)
         val btnAddEvent = findViewById<ImageView>(R.id.btnAddEvent)
 
-        rvEvents.layoutManager = LinearLayoutManager(this)
-        eventAdapter = EventAdapter(
-            eventMap[selectedDate] ?: mutableListOf(),
-            onEditClick = { position -> openEditEventActivity(position) },
-            onDeleteClick = { position -> deleteEvent(position) }
-        )
+        eventAdapter = EventAdapter(mutableListOf(), onEditClick = { position ->
+            openEditEventActivity(position)
+        }, onDeleteClick = { position ->
+            deleteEvent(position)
+        })
         rvEvents.adapter = eventAdapter
+        rvEvents.layoutManager = LinearLayoutManager(this)
 
         // Configura o listener para o calendário
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -84,19 +85,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private val addEventLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    val addEventLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             val title = result.data?.getStringExtra("title")
             val description = result.data?.getStringExtra("description")
             val time = result.data?.getStringExtra("time")
             val date = result.data?.getStringExtra("date")
-            if (title != null && description != null && time != null && date != null) {
-                val newEvent = Event(title, description, time)
-                if (!eventMap.containsKey(date)) {
-                    eventMap[date] = mutableListOf()
+
+            if (title != null && time != null && date != null) {
+                Log.d("MainActivity", "Evento Recebido: $title para a data: $date")
+
+                val newEvent = Event(title, description ?: "", time)
+                eventMap[date]?.add(newEvent) ?: run {
+                    eventMap[date] = mutableListOf(newEvent)
                 }
-                eventMap[date]?.add(newEvent)
                 updateEventsForSelectedDate()
+            } else {
+                Log.e("MainActivity", "Data ou informações do evento estão nulas.")
             }
         }
     }

@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 
@@ -35,16 +37,18 @@ class AddEventActivity : AppCompatActivity() {
             val title = etTitle.text.toString()
             val description = etDescription.text.toString()
             val time = etTime.text.toString()
+
             if (title.isNotBlank() && time.isNotBlank()) {
-                val event = "$title\n$description\n$time"
                 val resultIntent = Intent().apply {
-                    putExtra("event", event)
+                    putExtra("title", title)
+                    putExtra("description", description)
+                    putExtra("time", time)
                     putExtra("date", intent.getStringExtra("date"))
                 }
                 setResult(RESULT_OK, resultIntent)
                 finish()
             } else {
-                // Handle empty title or time case if needed
+                Toast.makeText(this, "O título e o horário são obrigatórios", Toast.LENGTH_SHORT).show()
             }
         }
 
