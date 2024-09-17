@@ -13,64 +13,84 @@
         android:layout_height="match_parent"
         android:background="@color/backgroundColor">
 
-      <TextView
-          android:id="@+id/textMain"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="DAILY EVENTS"
-          android:fontFamily="@font/poppins_extrabold"
-          android:layout_marginTop="40dp"
-          android:textSize="20sp"
-          android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/textMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DAILY EVENTS"
+            android:fontFamily="@font/poppins_extrabold"
+            android:layout_marginTop="40dp"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"/>
 
+        <!-- LinearLayout with spacing between buttons -->
         <LinearLayout
             android:id="@+id/layoutMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_below="@id/textMain"
-            android:layout_centerInParent="true">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
+                android:id="@+id/todosButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="90dp"
-                android:backgroundTint="@color/attColor"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/attColorMain"
                 android:fontFamily="@font/roboto_bold"
                 android:textColor="@color/textColor"
                 android:text="Todos"/>
 
             <Button
+                android:id="@+id/metasButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/attColor"
                 android:textColor="@color/textColor"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Metas"/>
 
-
         </LinearLayout>
 
-        <!-- Calendar for selecting date -->
-        <CalendarView
-            android:id="@+id/calendarView"
+        <!-- ScrollView to make the content scrollable if necessary -->
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutMenu"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="80dp">
 
-        <!-- Events list -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvEvents"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/calendarView"
-            android:layout_above="@id/btnAddEvent"
-            android:layout_margin="16dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Calendar for selecting date -->
+                <CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Events list -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:paddingBottom="20dp"
+                    android:clipToPadding="false" />
+
+            </LinearLayout>
+        </ScrollView>
 
         <!-- Add event button -->
-        
         <ImageView
             android:id="@+id/btnAddEvent"
             android:layout_width="80dp"
@@ -84,8 +104,11 @@
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp" />
     </RelativeLayout>
 
     <!-- Navigation menu -->
@@ -95,5 +118,4 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/drawer_menu" />
-
 </androidx.drawerlayout.widget.DrawerLayout>

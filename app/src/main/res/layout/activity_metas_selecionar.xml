@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    tools:context=".MetasSelecionar">
+
+    <TextView
+        android:id="@+id/textSelectMeta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecione uma meta:"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupMetas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textSelectMeta"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <RadioButton
+            android:id="@+id/radioExercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exercício físico"
+            android:fontFamily="@font/roboto_light"/>
+
+        <RadioButton
+            android:id="@+id/radioBeberAgua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beber água"
+            android:fontFamily="@font/roboto_light"/>
+
+        <RadioButton
+            android:id="@+id/radioEstudarMais"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estudar mais"
+            android:fontFamily="@font/roboto_light"/>
+
+        <RadioButton
+            android:id="@+id/radioLer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ler"
+            android:fontFamily="@font/roboto_light"/>
+
+        <RadioButton
+            android:id="@+id/radioHobbie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Encontrar novo hobbie"
+            android:fontFamily="@font/roboto_light"/>
+
+        <RadioButton
+            android:id="@+id/radioMeditar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meditar"
+            android:fontFamily="@font/roboto_light"/>
+
+        <RadioButton
+            android:id="@+id/radioAlongar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alongar-se"
+            android:fontFamily="@font/roboto_light"/>
+
+        <RadioButton
+            android:id="@+id/radioCorrer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correr"
+            android:fontFamily="@font/roboto_light"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonConfirmar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirmar"
+        android:backgroundTint="@color/subColor"
+        android:textColor="@color/backgroundColor"
+        android:layout_below="@id/radioGroupMetas"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+</RelativeLayout>

@@ -4,6 +4,8 @@
     <color name="backgroundColor"> #F2F2F2</color>
     <color name="itemColor">#D3D3D3</color>
     <color name="attColor">#1DF2F2</color>
+    <color name="attColorMain">#14BBBB</color>
     <color name="subColor">#146577</color>
     <color name="tema">#49454f</color>
+    <color name="grey">#D5D5D5</color>
 </resources>
